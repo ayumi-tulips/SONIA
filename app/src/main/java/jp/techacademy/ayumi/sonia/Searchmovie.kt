@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
@@ -14,10 +15,21 @@ import jp.techacademy.ayumi.sonia.databinding.ActivitySearchmovieBinding
 
 class Searchmovie : YouTubeBaseActivity() {
     // 選択肢
-    private val spinnerItems = arrayOf("カテゴリー", "食べ物", "動物" , "ファッション")
+    private val spinnerItems = arrayOf(
+        "カテゴリー",
+        "ユースロールモデル",
+        "IT・テクノロジー",
+        "イノベーター" ,
+        "社会貢献・地域活性化",
+        "研究・開発",
+        "メディカル・ヘルスケア",
+        "経営・マネジメント",
+        "人を支える",
+        "国際")
+    private var searchCategory = "カテゴリー"
     private lateinit var binding: ActivitySearchmovieBinding
     var mYouTubePlayerView: YouTubePlayerView? = null
-    var mOnInitializedListener: YouTubePlayer.OnInitializedListener? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +51,9 @@ class Searchmovie : YouTubeBaseActivity() {
                 position: Int,
                 id: Long
             ) {
+                val spinnerParent = parent as Spinner
+                searchCategory = spinnerParent.selectedItem as String
+                Log.e("DEBUG", "spinner is tapped.")
                 Log.e("DEBUG", "tapped")
             }
 
@@ -50,26 +65,8 @@ class Searchmovie : YouTubeBaseActivity() {
 //        mYouTubePlayerView = findViewById(R.id.Youtube_view)
 //        mYouTubePlayerView.initialize(API_KEY, mOnInitializedListener);
 
-        mOnInitializedListener = object : YouTubePlayer.OnInitializedListener {
-            override fun onInitializationSuccess(
-                provider: YouTubePlayer.Provider,
-                youTubePlayer: YouTubePlayer,
-                b: Boolean
-            ) {
-                //youTubePlayer.loadVideo("BcqxLCWn-CE");
-                youTubePlayer.cuePlaylist("PLWFz96RhKjnT0fw9uhZSduYcRFUqkP-Yx")
-            }
 
-            override fun onInitializationFailure(
-                provider: YouTubePlayer.Provider,
-                youTubeInitializationResult: YouTubeInitializationResult
-            ) {
-            }
-        }
 
     }
 
-    companion object {
-        const val API_KEY ="AIzaSyC7tNJmirdch7FdAyT5wLWV70rhQ-gWRNI"
-    }
 }
