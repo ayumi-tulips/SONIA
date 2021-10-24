@@ -9,7 +9,7 @@ import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
 
-class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
+class RecyclerViewAdapter(private val searchCategory: MutableList<String>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
     var mOnInitializedListener: YouTubePlayer.OnInitializedListener? = null
     private lateinit var listener: OnClickListener
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
@@ -56,7 +56,31 @@ class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        mOnInitializedListener = object : YouTubePlayer.OnInitializedListener {
+            // 初期化に成功した場合
+            override fun onInitializationSuccess(
+                provider: YouTubePlayer.Provider,
+                youTubePlayer: YouTubePlayer,
+                b: Boolean
+            ) {
+                youTubePlayer.loadVideo(searchCategory[position])
+            }
+
+            // 初期化に失敗した場合
+            override fun onInitializationFailure(
+                provider: YouTubePlayer.Provider,
+                youTubeInitializationResult: YouTubeInitializationResult
+            ) {
+            }
+        }
+
+        // 該当するカテゴリーの動画を検索し、変数に代入する。
+
+//        val movie = apiConnection.movieList[position]
+        // セルのクリックイベントをセット
+        holder.itemView.setOnClickListener {
+            listener.onItemClick("健康")
+        }
     }
 
     override fun getItemCount(): Int {

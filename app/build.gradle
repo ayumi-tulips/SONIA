@@ -37,6 +37,14 @@ android {
 }
 
 dependencies {
+    // recyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    // OKHttp (HttpClient)
+    implementation("com.squareup.okhttp3:okhttp:4.8.1")
+    implementation "com.squareup.okhttp3:logging-interceptor:4.8.1" // OkHttpのログ出力に必要
+    // Gson (Json解析ライブラリ)
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'

@@ -30,5 +30,6 @@ class watchmovie : YouTubeBaseActivity(){
     }
     companion object {
         const val API_KEY = "AIzaSyC7tNJmirdch7FdAyT5wLWV70rhQ-gWRNI"
+        const val YOUTUBEDATA = "AIzaSyDB5OfiCiLDPkUmhQZARe4vjgL0alFdVE8"
     }
 }
